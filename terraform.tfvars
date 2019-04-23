@@ -2,6 +2,7 @@ virtual_machine_domain = "coc.net"
 virtual_machine_network_address = "10.134.214.128/25"
 virtual_machine_gateway = "10.134.214.137"
 virtual_machine_ip_address_start = "156"
+virtual_machine_dns_servers = [
   "8.8.8.8",
 ]
 virtual_machine_fiweb_ip = "10.134.214.160"
