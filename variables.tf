@@ -14,7 +14,7 @@ variable "virtual_machine_domain" {
 // IPaddress for fiweb
 variable "virtual_machine_fiweb_ip" {
   type = "string"
-  default = "10.134.214.137"
+  default = "10.134.214.161"
 }
 
 // IPaddress for fidb
