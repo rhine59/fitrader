@@ -1,10 +1,3 @@
-provider "vsphere" {
-  user           = "Administrator@vsphere.local"
-  password       = "4!0XkF!n"
-  vsphere_server = "10.134.214.130"
-  allow_unverified_ssl = true
-}
-
 data "vsphere_datacenter" "dc" {
   name = "datacenter1"
 }

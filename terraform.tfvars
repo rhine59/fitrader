@@ -1,4 +1,3 @@
-virtual_machine_name_prefix = "fininf"
 virtual_machine_domain = "coc.net"
 virtual_machine_network_address = "10.134.214.128/25"
 virtual_machine_gateway = "10.134.214.137"

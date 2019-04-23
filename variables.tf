@@ -5,14 +5,10 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
-// The name prefix of the virtual machines to create...
-variable "virtual_machine_name_prefix" {
-  type = "string"
-}
-
 // The domain name to set up each virtual machine as.
 variable "virtual_machine_domain" {
   type = "string"
+  default = "coc.net"
 }
 
 // IPaddress for fiweb
