@@ -67,6 +67,8 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Starti
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Websphere Liberty and daytrader8 started"}' \
 	https://hooks.slack.com/services/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
 echo "*INFO* Websphere Liberty started RC $?"
+curl -X POST -H 'Content-type: application/json' --data '{"text":"SUCCESS - Please use http://10.134.214.161:9080/daytrader/ to connect to your new workload"}' \
+	https://hooks.slack.com/services/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
 echo "*INFO* execution of /tmp/install_software.sh complete"
 exit 0
 EOF
@@ -238,8 +240,6 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - DB2 TRA
 echo "*INFO* restore replace of TradeDB database completed RC $?"
 echo "*INFO* execution of /tmp/install_software.sh completed"
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - configuration complete"}' \
-	https://hooks.slack.com/services/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
-curl -X POST -H 'Content-type: application/json' --data '{"text":"SUCCESS - Please use http://10.134.214.161:9080/daytrader/ to connect to your new workload"}' \
 	https://hooks.slack.com/services/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
 exit 0
 EOF
