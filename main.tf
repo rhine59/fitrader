@@ -298,5 +298,5 @@ output "fidb ip address" {
 }
 
 output "daytrader8" {
-  value = "http://${vsphere_virtual_machine.fidb.guest_ip_addresses.0}:9080/daytrader/"
+  value = "http://${vsphere_virtual_machine.fiweb.guest_ip_addresses.0}:9080/daytrader/"
 }
