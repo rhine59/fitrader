@@ -65,6 +65,7 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Starti
 	https://hooks.slack.com/services/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
 /wlp/bin/server start daytrader8Server 
 sleep 30
+/wlp/bin/server start daytrader8Server 
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Websphere Liberty and daytrader8 started"}' \
 	https://hooks.slack.com/services/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
 echo "*INFO* Websphere Liberty started RC $?"
