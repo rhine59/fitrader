@@ -61,7 +61,7 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Instal
 echo "*INFO* installing DB2 Java drivers ....."
 cd /tmp && wget http://utility/export/DB2/db2drivers.tar > /dev/null 2>&1
 mkdir /wlp/db2 && cd /wlp/db2 > /dev/null 2>&1
-tar -xvf db2drivers.tar > /dev/null 2>&1
+tar -xvf /tmp/db2drivers.tar > /dev/null 2>&1
 echo "*INFO* DB2 Java driver installed RC $?"
 
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Installing Java8"}' \
