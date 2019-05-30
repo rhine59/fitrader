@@ -46,15 +46,41 @@ echo "*INFO* unzip install RC $?"
 echo "*INFO* downloading Websphere Liberty ....."
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Downloading Websphere Liberty"}' \
 	https://hooks.slack.com/services/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
-cd /tmp && wget http://utility/export/Liberty/daytrader8Server.zip > /dev/null 2>&1
+cd /tmp && wget http://utility/export/Liberty/daytrader8.zip > /dev/null 2>&1
 echo "*INFO* downloaded Websphere Liberty RC $?"
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Websphere Liberty downloaded"}' \
 	https://hooks.slack.com/services/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
 echo "*INFO* extracted Websphere Liberty ....."
-cd / && unzip /tmp/daytrader8Server.zip > /dev/null 2>&1
+cd / && unzip /tmp/daytrader8.zip > /dev/null 2>&1
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Websphere Liberty installed"}' \
 	https://hooks.slack.com/services/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
 echo "*INFO* extracted Websphere Liberty RC $?"
+
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Installing DB2 Java drivers"}' \
+        https://hooks.slack.com/services/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
+echo "*INFO* installing DB2 Java drivers ....."
+cd /tmp && wget http://utility/export/DB2/db2drivers.tar > /dev/null 2>&1
+mkdir /wlp/db2 && cd /wlp/db2 > /dev/null 2>&1
+tar -xvf db2drivers.tar > /dev/null 2>&1
+echo "*INFO* DB2 Java driver installed RC $?"
+
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Installing Java8"}' \
+        https://hooks.slack.com/services/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
+echo "*INFO* downloading Java"
+cd /tmp && wget http://utility/export/Java/ibm-java-sdk-8.0-5.31-x86_64-archive.bin > /dev/null 2>&1
+echo "*INFO* downloaded Java RC $?"
+chmod 755 /tmp/ibm-java-sdk-8.0-5.31-x86_64-archive.bin
+echo "*INFO* building Java installation response file"
+echo INSTALLER_UI=silent > /tmp/installer.properties
+echo LICENSE_ACCEPTED=TRUE >> /tmp/installer.properties
+echo USER_INSTALL_DIR=/wlp/ibm-java-x86_64-80 >> /tmp/installer.properties
+echo "*INFO* install Java8 ....."
+/tmp/ibm-java-sdk-8.0-5.31-x86_64-archive.bin -i silent -f /tmp/installer.properties > /dev/null 2>&1
+echo "*INFO* installed Java8 into /wlp/ibm-java-x86_64-80 RC $?"
+echo "*INFO* setting JAVA_HOME to /wlp/ibm-java-x86_64-80 in /wlp/usr/servers/daytrader8/server.env"
+echo JAVA_HOME=/wlp/ibm-java-x86_64-80/jre >> /wlp/usr/servers/daytrader8/server.env
+
+
 echo "*INFO* starting Websphere Liberty ....."
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Waiting 3 minutes to allow database restore to complete on fidb"}' \
 	https://hooks.slack.com/services/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
@@ -63,7 +89,7 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Resumi
 	https://hooks.slack.com/services/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
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Starting Websphere Liberty with daytrader8 application"}' \
 	https://hooks.slack.com/services/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
-/wlp/bin/server start daytrader8Server --clean
+/wlp/bin/server start daytrader8 --clean
 sleep 10
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Websphere Liberty and daytrader8 started"}' \
 	https://hooks.slack.com/services/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
