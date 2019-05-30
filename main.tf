@@ -198,7 +198,7 @@ resource "null_resource" "config-static-route-fidb" {
     content = <<EOF
 #!/bin/bash -x
 echo "--- customise fidb begin ---"
-curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - Starting network configuration"}' \
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb2 - Starting network configuration"}' \
 	https://hooks.slack.com/services/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
 echo 10.134.214.138  utility >> /etc/hosts
 cp /etc/network/interfaces /etc/network/interfaces.tmp
@@ -206,7 +206,7 @@ grep -iv route /etc/network/interfaces.tmp > /etc/network/interfaces
 echo up route add -net ${var.network_route1} netmask ${var.network_netmask1} gw ${var.network_gateway1} >> /etc/network/interfaces
 echo up route add -net ${var.network_route2} netmask ${var.network_netmask2} gw ${var.network_gateway2} >> /etc/network/interfaces
 systemctl restart networking
-curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - Network configuration completed"}' \
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb2 - Network configuration completed"}' \
 	https://hooks.slack.com/services/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
 echo "--- customise fidb end ---"
 exit 0
@@ -236,7 +236,7 @@ echo "*INFO* executing /tmp/install_software.sh"
 echo 10.134.214.138  utility >> /etc/hosts
 echo "*INFO* installing extra packages ....."
 apt install -y binutils apt-file lib32ncurses5 lib32z1 libaio1 lib32stdc++6 libpam0g:i386 > /dev/null 2>&1
-curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - Extra OS packages installed"}' \
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb2 - Extra OS packages installed"}' \
 	https://hooks.slack.com/services/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
 echo "*INFO* install complete RC $?"
 echo "*INFO* downloading DB2 ......"
@@ -249,24 +249,24 @@ echo "*INFO* downloading DB2 install response file"
 wget http://utility/export/DB2/db2server.rsp > /dev/null 2>&1
 echo "*INFO* downloading of DB2 install response file complete RC $?"
 echo "*INFO* installing DB2 ..............."
-curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - Installing DB2 ......."}' \
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb2 - Installing DB2 ......."}' \
 	https://hooks.slack.com/services/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
 /tmp/server_dec/db2setup -r /tmp/db2server.rsp > /dev/null 2>&1
-curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - DB2 install completed"}' \
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb2 - DB2 install completed"}' \
 	https://hooks.slack.com/services/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
 echo "*INFO* DB2 install completed RC $?"
 rm -fr /tmp/v11.1_linuxx64_dec.tar /tmp/server_dec
 echo "*INFO* Downloading backup of TradeDB database"
 su - db2inst1 -c 'wget http://utility/export/DB2/TRADEDB.0.db2inst1.DBPART000.20190423141353.001 > /dev/null 2>&1'
 echo "*INFO* Restoring backup of TradeDB database"
-curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - restoring TRADEDB database backup ......."}' \
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb2 - restoring TRADEDB database backup ......."}' \
 	https://hooks.slack.com/services/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
 su - db2inst1 -c 'db2 restore db tradedb replace existing redirect; db2 restore db tradedb continue; db2 activate db tradedb'
-curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - DB2 TRADEDB database restore completed"}' \
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb2 - DB2 TRADEDB database restore completed"}' \
 	https://hooks.slack.com/services/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
 echo "*INFO* restore replace of TradeDB database completed RC $?"
 echo "*INFO* execution of /tmp/install_software.sh completed"
-curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb - configuration complete"}' \
+curl -X POST -H 'Content-type: application/json' --data '{"text":"fidb2 - configuration complete"}' \
 	https://hooks.slack.com/services/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
 exit 0
 EOF
