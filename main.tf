@@ -99,8 +99,6 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Websph
 curl -X POST -H 'Content-type: application/json' --data '{"text":"SUCCESS - Please use http://${vsphere_virtual_machine.fiweb.guest_ip_addresses.0}:9080/daytrader/ to connect to your new workload"}' \
 	https://hooks.slack.com/services/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
 
-http://${vsphere_virtual_machine.fiweb.guest_ip_addresses.0}:9080/daytrader/
-
 echo "*INFO* execution of /tmp/install_software.sh complete"
 exit 0
 EOF
