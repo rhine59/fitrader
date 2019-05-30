@@ -90,12 +90,17 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Resumi
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Starting Websphere Liberty with daytrader8 application"}' \
 	https://hooks.slack.com/services/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
 /wlp/bin/server start daytrader8 --clean
-sleep 10
+sleep 60
+/wlp/bin/server start daytrader8 --clean
+echo "*INFO* Websphere Liberty started RC $?"
 curl -X POST -H 'Content-type: application/json' --data '{"text":"fiweb - Websphere Liberty and daytrader8 started"}' \
 	https://hooks.slack.com/services/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
-echo "*INFO* Websphere Liberty started RC $?"
-curl -X POST -H 'Content-type: application/json' --data '{"text":"SUCCESS - Please use http://10.134.214.161:9080/daytrader/ to connect to your new workload"}' \
+
+curl -X POST -H 'Content-type: application/json' --data '{"text":"SUCCESS - Please use http://${vsphere_virtual_machine.fiweb.guest_ip_addresses.0}:9080/daytrader/ to connect to your new workload"}' \
 	https://hooks.slack.com/services/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
+
+http://${vsphere_virtual_machine.fiweb.guest_ip_addresses.0}:9080/daytrader/
+
 echo "*INFO* execution of /tmp/install_software.sh complete"
 exit 0
 EOF
